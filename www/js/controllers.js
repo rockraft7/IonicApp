@@ -52,7 +52,7 @@ angular.module('starter.controllers', ['starter.services'])
     ];
   })
 
-  .controller('InvoiceCtrl', ['currencyConverter', function(currencyConverter) {
+  .controller('InvoiceCtrl', ['currencyConverter', function (currencyConverter) {
     this.qty = 1;
     this.cost = 100;
     this.fromCurr = 'USD';
@@ -62,9 +62,32 @@ angular.module('starter.controllers', ['starter.services'])
       return currencyConverter.convert(this.cost * this.qty, this.fromCurr, toCurr);
     };
 
-    this.pay = function() {
+    this.pay = function () {
       alert('Gracias!');
     }
+  }])
+
+  .controller('MapsController', ['googlemap', function ($scope) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      try {
+        console.log("Displaying maps....");
+        /*
+        var mapOptions = {
+          center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        */
+
+        var map = googlemap.google.maps.Map.getMap(document.getElementById("map"));
+        map.on(googlemap.google.maps.event.MAP_READY, function() {
+          console.log("Map ready!");
+        });
+        //$scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+      } catch (e) {
+        console.log("Error displaying map: " + e);
+      }
+    });
   }])
 
   .controller('PlaylistCtrl', function ($scope, $stateParams) {

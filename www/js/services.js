@@ -1,8 +1,11 @@
 /**
  * Created by faizal on 1/18/16.
  */
-
 angular.module('starter.services', [])
+  .factory('googlemap', [], function() {
+    return plugin;
+  })
+
   .factory('currencyConverter', ['$http', function($http) {
     var YAHOO_FINANCE_URL_PATTERN =
       '//query.yahooapis.com/v1/public/yql?q=select * from '+
